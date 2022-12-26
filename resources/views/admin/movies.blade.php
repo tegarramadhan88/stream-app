@@ -25,26 +25,38 @@
 
           <div class="row">
             <div class="col-md-12">
-              <table id="example2" class="table table-bordered table-hover">
+              <table id="movies" class="table table-bordered table-hover">
                 <thead>
                   <tr>
                     <th>Id</th>
                     <th>Title</th>
-                    <th>Thumbnail</th>
+                    <th>Small Thumbnail</th>
+                    <th>Large Thumbnail</th>
                     <th>Categories</th>
                     <th>Casts</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach ($movies as $movie)
                     <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                        <td>{{ $movie->id }}</td>
+                        <td>{{ $movie->title }}</td>
+                        <td>
+                          <img src="{{ asset('storage/thumbnail/'.$movie->small_thumbnail) }}" width="50%">
+                        </td>
+                        <td>
+                          <img src="{{ asset('storage/thumbnail/'.$movie->large_thumbnail) }}" width="50%">
+                        </td>
+                        <td>{{ $movie->categories }}</td>
+                        <td>{{ $movie->casts }}</td>
+                        <td>
+                          <a href="{{ route('admin.movie.edit', $movie->id) }}" class="btn btn-secondary">
+                            <i class="fas fa-edit"></i>
+                          </a>
+                        </td>
                     </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -53,4 +65,10 @@
       </div>
     </div>
   </div>
+@endsection
+
+@section('js')
+  <script>
+    $('#movies').DataTable();
+  </script>
 @endsection
