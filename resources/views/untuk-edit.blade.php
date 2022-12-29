@@ -1,58 +1,19 @@
-<div class="card-body">
-    <div class="form-group">
-      <label for="title">Title</label>
-      <input type="text" class="form-control" id="title" name="title" value="{{ $movie->title }}" placeholder="e.g Guardian of The Galaxy">
-    </div>
-    <div class="form-group">
-      <label for="trailer">Trailer</label>
-      <input type="text" class="form-control" id="trailer" name="trailer" value="{{ $movie->trailer }}" placeholder="Video url">
-    </div>
-    <div class="form-group">
-      <label for="trailer">Movie</label>
-      <input type="text" class="form-control" id="movie" name="movie" value="{{ $movie->movie }}" placeholder="Video url">
-    </div>
-    <div class="form-group">
-      <label for="duration">Duration</label>
-      <input type="text" class="form-control" id="duration" name="duration" value="{{ $movie->duration }}" placeholder="1h 39m">
-    </div>
-    <div class="form-group">
-      <label>Date:</label>
-      <div class="input-group date" id="release-date" data-target-input="nearest">
-        <input type="text" name="release_date" value="{{ $movie->release_date }}" class="form-control datetimepicker-input" data-target="#release-date"/>
-        <div class="input-group-append" data-target="#release-date" data-toggle="datetimepicker">
-          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-        </div>
+@foreach ( $movies as $movie )
+  <div class="col-span-1 relative overflow-hidden group">
+    <img src="{{ asset('storage/thumbnail/'.$movie->large_thumbnail) }}" class="object-cover rounded-[30px]" alt="">
+    <div
+      class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black rounded-bl-[28px] rounded-br-[28px] z-10 translate-y-0 group-hover:translate-y-[300px] transition ease-in-out duration-500 group-hover:bg-transparent">
+      <div class="px-7 pb-7">
+        <div class="font-medium text-xl text-white">{{ $movie->title }}</div>
+        <p class="mb-0 text-stream-gray text-base mt-[10px]">
+            {{ date('Y', strtotime($movie->release_date)) }}
+        </p>
       </div>
     </div>
-    <div class="form-group">
-      <label for="short-about">Casts</label>
-      <input type="text" class="form-control" id="short-about" name="casts" value="{{ $movie->casts }}" placeholder="Jackie Chan">
+    <div class="absolute top-1/2 left-1/2 -translate-y-[500px] group-hover:-translate-y-1/2
+        -translate-x-1/2 z-20 transition ease-in-out duration-500">
+        <img src="{{ asset('stream/assets/images/ic_play.svg') }}" class="" width="80" alt="">
     </div>
-    <div class="form-group">
-      <label for="short-about">Categories</label>
-      <input type="text" class="form-control" id="short-about" name="categories" value="{{ $movie->categories }}" placeholder="Action, Fantasy">
-    </div>
-    <div class="form-group">
-      <label for="small-thumbnail">Small Thumbnail</label>
-      <input type="file" class="form-control" name="small_thumbnail">
-    </div>
-    <div class="form-group">
-      <label for="large-thumbnail">Large Thumbnail</label>
-      <input type="file" class="form-control" name="large_thumbnail">
-    </div>
-    <div class="form-group">
-      <label for="short-about">Short About</label>
-      <input type="text" class="form-control" id="short-about" name="short_about" value="{{ $movie->short_about }}" placeholder="Awesome Movie">
-    </div>
-    <div class="form-group">
-      <label for="short-about">About</label>
-      <input type="text" class="form-control" id="about" name="about" value="{{ $movie->about }}" placeholder="Awesome Movie">
-    </div>
-    <div class="form-group">
-      <label>Featured</label>
-      <select class="custom-select" name="featured">
-        <option value="0" {{ $movie->featured == '0' ? 'selected' : ""}}>No</option>
-        <option value="1" {{ $movie->featured == '1' ? 'selected' : ""}}>Yes</option>
-      </select>
-    </div>
-</div>
+    <a href="#" class="inset-0 absolute z-50"></a>
+  </div>
+@endforeach
